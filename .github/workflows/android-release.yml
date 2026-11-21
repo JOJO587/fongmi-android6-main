@@ -176,14 +176,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/fongmi-official-568"
           curl --fail --location --retry 3 --retry-all-errors \
             --connect-timeout 20 --max-time 600 \
-            "https://github.com/FongMi/Release/releases/download/5.6.8/mobile-arm64_v8a.apk" \
+            "https://github.com/15840213978a/fongmi-android6-main/releases/download/v5.6.8-ci-7-1/mobile-arm64_v8a-b6.apk" \
             --output "$RUNNER_TEMP/fongmi-official-568/mobile-arm64_v8a.apk"
           curl --fail --location --retry 3 --retry-all-errors \
             --connect-timeout 20 --max-time 600 \
-            "https://github.com/FongMi/Release/releases/download/5.6.8/mobile-armeabi_v7a.apk" \
+            "https://github.com/15840213978a/fongmi-android6-main/releases/download/v5.6.8-ci-7-1/mobile-armeabi_v7a-b6.apk" \
             --output "$RUNNER_TEMP/fongmi-official-568/mobile-armeabi_v7a.apk"
-          echo "2e23a0ecc61f3fb908a566661f9e3f78d0027198671e0aed6bd1b94570c3eaea  $RUNNER_TEMP/fongmi-official-568/mobile-arm64_v8a.apk" | sha256sum --check
-          echo "6c062459ccd6b0f8c4bfb4293b47b732e47943032b1d9959fc4bcd1b45d299f9  $RUNNER_TEMP/fongmi-official-568/mobile-armeabi_v7a.apk" | sha256sum --check
+          echo "05193b15551c44c1221e742cf5e3f913a99e5291e151dcb0154d5a09351fb666  $RUNNER_TEMP/fongmi-official-568/mobile-arm64_v8a.apk" | sha256sum --check
+          echo "a51bd2f3b5ee3fd1b3008319d0691dde5e52021fc712682a41a11a36a5b51a53  $RUNNER_TEMP/fongmi-official-568/mobile-armeabi_v7a.apk" | sha256sum --check
 
       - name: Update compatibility scripts for official 5.6.8 hashes
         run: |
@@ -192,8 +192,8 @@ jobs:
           from pathlib import Path
 
           replacements = {
-              "5428c11d5aa09813dfa2fde8a32be2beeeddfc45d093b89e46ed53cd696a3b3c": "2e23a0ecc61f3fb908a566661f9e3f78d0027198671e0aed6bd1b94570c3eaea",
-              "492bc0b1d4607a41d3c3f56d37bc590be0ee6b8b481bebe52f6dd2b0819d2385": "6c062459ccd6b0f8c4bfb4293b47b732e47943032b1d9959fc4bcd1b45d299f9",
+              "5428c11d5aa09813dfa2fde8a32be2beeeddfc45d093b89e46ed53cd696a3b3c": "05193b15551c44c1221e742cf5e3f913a99e5291e151dcb0154d5a09351fb666",
+              "492bc0b1d4607a41d3c3f56d37bc590be0ee6b8b481bebe52f6dd2b0819d2385": "a51bd2f3b5ee3fd1b3008319d0691dde5e52021fc712682a41a11a36a5b51a53",
           }
 
           files = [
