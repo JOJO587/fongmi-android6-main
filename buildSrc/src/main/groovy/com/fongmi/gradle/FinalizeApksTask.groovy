@@ -114,7 +114,8 @@ abstract class FinalizeApkWorkAction implements WorkAction<FinalizeApkParameters
         } finally {
             inputZip.close()
         }
-        if (!removedRequirements || !removedStdlib || removedNative == 0 || !keptRequirements || !keptStdlib || keptNative == 0) {
+        boolean anyChaquopy = removedRequirements || removedStdlib || removedNative > 0 || keptRequirements || keptStdlib || keptNative > 0
+        if (anyChaquopy && (!keptRequirements || !keptStdlib || keptNative == 0)) {
             throw new GradleException("Incomplete Chaquopy ABI assets for ${abi} in ${inputApk.name}")
         }
     }
