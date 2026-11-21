@@ -83,6 +83,26 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Patch Chaquopy minSdk (24->21) to keep Python at minSdk 23
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/cq-orig.jar https://repo1.maven.org/maven2/com/chaquo/python/gradle/17.0.0/gradle-17.0.0.jar
+          mkdir -p local-maven/com/chaquo/python/gradle/17.0.0
+          python3 patchfiles/patch_chaquopy.py /tmp/cq-orig.jar local-maven/com/chaquo/python/gradle/17.0.0/gradle-17.0.0.jar
+          curl -fsSL -o local-maven/com/chaquo/python/gradle/17.0.0/gradle-17.0.0.pom https://repo1.maven.org/maven2/com/chaquo/python/gradle/17.0.0/gradle-17.0.0.pom
+          LM="$(pwd)/local-maven"
+          python3 - "$LM" <<'PYINJ'
+          import sys
+          lm=sys.argv[1]
+          p='settings.gradle'; s=open(p).read()
+          if 'local-maven' not in s:
+              s=s.replace('    repositories {\n        gradlePluginPortal()',
+                          '    repositories {\n        maven { url = uri("%s") }\n        gradlePluginPortal()' % lm, 1)
+          open(p,'w').write(s)
+          assert 'local-maven' in s, 'inject failed'
+          print('local maven injected')
+          PYINJ
+          grep -n local-maven settings.gradle
       - name: Install Python 3.10
         run: |
           set -euo pipefail
