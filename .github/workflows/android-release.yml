@@ -83,6 +83,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Setup Chaquopy 15.0.1 + VersionNumber shim (Python3.8/API21, Gradle9-compatible)
+        run: |
+          set -euo pipefail
+          bash patchfiles/setup_chaquopy15.sh
+
       - name: Install Python 3.8 (for Chaquopy app Python 3.8; Android6-safe)
         run: |
           set -euo pipefail
