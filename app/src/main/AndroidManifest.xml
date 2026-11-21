@@ -37,7 +37,7 @@
         </intent>
     </queries>
 
-    <uses-sdk tools:overrideLibrary="com.fongmi.hook,com.ghost.thunder,com.tvbus.engine" />
+    <uses-sdk tools:overrideLibrary="com.fongmi.hook,com.ghost.thunder,com.tvbus.engine,com.fongmi.chaquo" />
 
     <application
         android:name=".App"
